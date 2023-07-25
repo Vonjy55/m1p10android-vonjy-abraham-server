@@ -6,7 +6,8 @@ const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 
-const connectDb = require('./config/connection').client_local();
+
+const {client_local} = require('./config/connection').client_local
 
 
 const port = process.env.PORT || 3000;
@@ -30,11 +31,15 @@ app.get('/*',function(req,res,next){
     }
 })
 
-client_local(() => {
+client_local => {
+    if (err) {
+        console.error('Error connecting to the database:', err);
+        return;
+    }
     //Atao eto ny require Routes
     app.use(require('./routes/auth-routes'))
 
     app.listen(port, () => {
         console.log(`🏃Server is running on port ${port}...🏃`)
     })
-});
+};

@@ -1,5 +1,6 @@
 
-const client_local = require('../config/connection').client_local()
+const client_local = require('../config/connection').client_local
+
 
 module.exports = {
     saveOne: async function (user,options) {
