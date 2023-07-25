@@ -26,5 +26,5 @@ Content-Type: application/json
 
 ###
 
-GET {{baseUrl}}/auth/allUser HTTP/1.1
+GET {{baseUrl}}/api/auth/allUser HTTP/1.1
 

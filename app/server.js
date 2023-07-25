@@ -31,15 +31,11 @@ app.get('/*',function(req,res,next){
     }
 })
 
-client_local => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    //Atao eto ny require Routes
-    app.use(require('./routes/auth-routes'))
 
-    app.listen(port, () => {
-        console.log(`🏃Server is running on port ${port}...🏃`)
-    })
-};
+//Atao eto ny require Routes
+app.use(require('./routes/auth-routes'))
+
+app.listen(port, () => {
+    console.log(`🏃Server is running on port ${port}...🏃`)
+})
+

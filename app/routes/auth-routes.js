@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
-const clientRole = require('../utils/role').Client
 
 const recordRoutes = require('express').Router()
 
@@ -84,7 +83,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
 })
 
 
-recordRoutes.get('/auth/allUser', (req, res) => {
+recordRoutes.get('/api/auth/allUser', (req, res) => {
 
     userDb.getAll()
         .then((user) => {
