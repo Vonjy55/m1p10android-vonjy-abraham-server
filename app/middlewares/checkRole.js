@@ -11,7 +11,7 @@ function checkRole(roles) {
                         // user_role = result.role
                         let isValid = false;
                         for (var role of roles) {
-                            if (role == result.rows[0].role) {
+                            if (role == result[0].role) {
                                 isValid = true;
                             }
                         }

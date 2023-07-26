@@ -54,9 +54,9 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
             if (!user) {
                 throw new Error(`Pas de mail correspondant à '${req.body.email}'`)
             }
-            getUser = user.rows[0]
+            getUser = user[0]
 
-            return bcrypt.compare(req.body.password, user.rows[0].password)
+            return bcrypt.compare(req.body.password, user[0].password)
         })
         .then((response) => {
             if (!response) {
@@ -70,6 +70,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
                     expiresIn: '1h',
                 },
             )
+            console.log("login ok");
             return res.status(200).json({
                 token: jwtToken,
                 expiresIn: 3600,
@@ -86,7 +87,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
 })
 
 
-recordRoutes.get('/api/auth/allUser', checkJwt, checkRole(Client), (req, res) => {
+recordRoutes.get('/api/auth/allUser', (req, res) => {
 
     userDb.getAll()
         .then((user) => {

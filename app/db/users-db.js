@@ -9,12 +9,12 @@ module.exports = {
         return client_local.execute({sql:"insert into users(nom,prenom,password,email,telephone,adresse,role) values(?,?,?,?,?,?,?)",args:[user.nom,user.prenom,user.password,user.email,user.telephone,user.adresse,user.role]});
     },
     findOneById: async function(id) {
-        return  client_local.execute({sql:"select * from users where id = ?",args:[id]});
+        return  (await client_local.execute({sql:"select * from users where id = ?",args:[id]})).rows;
     },
     findOne: async function(email) {
-        return  client_local.execute({sql:"select * from users where email = ?",args:[email]});
+        return  (await client_local.execute({sql:"select * from users where email = ?",args:[email]})).rows;
     },
     getAll: async function() {
-        return client_local.execute("select * from users");
+        return (await client_local.execute("select * from users")).rows;
     }
 }
