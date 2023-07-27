@@ -12,7 +12,7 @@ module.exports = {
         return  (await client_local.execute({sql:"select * from users where id = ?",args:[id]})).rows;
     },
     findOne: async function(email) {
-        return  (await client_local.execute({sql:"select * from users where email = ?",args:[email]})).rows;
+        return  await client_local.execute({sql:"select * from users where email = :e",args:{e : email}}).rows;
     },
     getAll: async function() {
         return (await client_local.execute("select * from users")).rows;

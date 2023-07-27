@@ -1,7 +1,7 @@
 # @baseUrl = https://m1p10mean.onrender.com/
 
-@baseUrl = http://192.168.1.110:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDM5NTkzNywiZXhwIjoxNjkwMzk5NTM3fQ.oqhJhvNxlF-3GSeVvQAoyRdQOfDImkGLV59Q_ZZEYa0
+@baseUrl = http://192.168.88.58:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDQ0MDU0NiwiZXhwIjoxNjkwNDQ0MTQ2fQ.Depc6pgN0WhYrFgrN07fUe_2pdfQoSWnW-cFPzITBps
 
 
 ###

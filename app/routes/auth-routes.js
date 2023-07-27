@@ -11,6 +11,8 @@ let { AllUsers, Client } = require('../utils/role')
 
 const checkJwt = require('../middlewares/checkJwt')
 const checkRole = require('../middlewares/checkRole')
+const user = require('../models/user')
+const usersDb = require('../db/users-db')
 
 const baseRoute = '/api/auth'
 
@@ -41,21 +43,18 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function(req, res) {
 
 //login
 recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
-    let getUser
-    userDb
-        .findOne(
+    let getUser;
+    console.log(req.body.email);
+    // console.log(data);
+    userDb.findOne(
             req.body.email
         )
-        .catch((err) => {
-            console.log(err)
-            throw new Error(`Erreur lors de la recherche de l'email '${req.body.email}'`)
-        })
         .then((user) => {
+            console.log(user);
             if (!user) {
                 throw new Error(`Pas de mail correspondant à '${req.body.email}'`)
             }
             getUser = user[0]
-
             // return bcrypt.compare(req.body.password, user[0].password)
             return new Promise((resolve,reject) => {
                 resolve(true);
@@ -65,6 +64,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
             if (!response) {
                 throw new Error(`Erreur lors de la comparaison des MdP`)
             }
+            
             let jwtToken = jwt.sign({
                 name: getUser.nom,
                 userId: getUser.id,
