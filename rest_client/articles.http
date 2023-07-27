@@ -1,7 +1,8 @@
+
 # @baseUrl = https://m1p10mean.onrender.com/
 
-@baseUrl = http://127.0.0.1:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDQ0MDU0NiwiZXhwIjoxNjkwNDQ0MTQ2fQ.Depc6pgN0WhYrFgrN07fUe_2pdfQoSWnW-cFPzITBps
+@baseUrl = http://localhost:3000/api/article
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDMwNDUyNCwiZXhwIjoxNjkwMzA4MTI0fQ.dfT3fCOEOE_RI4NU11XrguST47OpT86FAInGVk2XUOw
 
 
 ###
@@ -18,8 +19,8 @@ Content-Type: application/json
     "role":"Client"
 }
 
-###
 
+###
 POST {{baseUrl}}/auth/login HTTP/1.1
 Content-Type: application/json
 
@@ -31,5 +32,11 @@ Content-Type: application/json
 
 ###
 
-GET {{baseUrl}}/auth/allUser HTTP/1.1
-Authorization: Bearer {{token}}
+GET {{baseUrl}} HTTP/1.1
+Authorization: Bearen {{token}}
+
+
+###
+
+GET {{baseUrl}}?s=Vato HTTP/1.1
+

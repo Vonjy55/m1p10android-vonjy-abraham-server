@@ -47,24 +47,21 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
     console.log(req.body.email);
     // console.log(data);
     userDb.findOne(
-            req.body.email
-        )
+        req.body.email
+    )
         .then((user) => {
             console.log(user);
-            if (!user) {
+            if (!user.rows.length) {
                 throw new Error(`Pas de mail correspondant à '${req.body.email}'`)
             }
-            getUser = user[0]
-            // return bcrypt.compare(req.body.password, user[0].password)
-            return new Promise((resolve,reject) => {
-                resolve(true);
-            })
+            getUser = user.rows[0]
+            return bcrypt.compare(req.body.password, getUser.password)
         })
         .then((response) => {
             if (!response) {
                 throw new Error(`Erreur lors de la comparaison des MdP`)
             }
-            
+
             let jwtToken = jwt.sign({
                 name: getUser.nom,
                 userId: getUser.id,
