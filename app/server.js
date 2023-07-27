@@ -34,6 +34,7 @@ app.get('/*',function(req,res,next){
 
 //Atao eto ny require Routes
 app.use(require('./routes/auth-routes'))
+app.use(require('./routes/article-routes'))
 
 app.listen(port, () => {
     console.log(`🏃Server is running on port ${port}...🏃`)
