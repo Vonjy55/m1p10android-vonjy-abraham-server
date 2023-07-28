@@ -1,0 +1,10 @@
+#!/usr/bin/zsh
+curl -F titre="Rova de Manjakamiadana" -F descr="Lieu historique" -F cover=@rest_client/pics/rova.jpg http://localhost:3000/api/article
+curl -F titre="Vato beach" -F descr="Espace" -F cover=@rest_client/pics/beach.jpg http://localhost:3000/api/article
+curl -F titre="Park de Tsimbazaza" -F descr="Park" -F cover=@rest_client/pics/park.jpg http://localhost:3000/api/article
+curl -F titre="Tsingy de Bemaraha" -F descr="Park" -F cover=@rest_client/pics/tsingy.jpg http://localhost:3000/api/article
+curl -F titre="KFC Gasy" -F descr="Fast Food" -F cover=@rest_client/pics/kfc.jpg http://localhost:3000/api/article
+curl -F titre="Celtel Hotel" -F descr="Hotel et relaxation" -F cover=@rest_client/pics/celtell.jpg http://localhost:3000/api/article
+curl -F titre="Rakiki au Palais des sports" -F descr="Evenement culturel" -F cover=@rest_client/pics/rakiki.jpg http://localhost:3000/api/article
+
+

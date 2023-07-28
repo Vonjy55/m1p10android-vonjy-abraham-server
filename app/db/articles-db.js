@@ -3,10 +3,19 @@ const client_local = require('../config/connection').client_local
 
 
 module.exports = {
+
     saveOne: async function(user) {
         console.log(user);
         return client_local.execute({ sql: "insert into articles(nom,prenom,password,email,telephone,adresse,role) values(?,?,?,?,?,?,?)", args: [user.nom, user.prenom, user.password, user.email, user.telephone, user.adresse, user.role] });
     },
+
+    saveNew: async function(article) {
+        return client_local.execute(
+            {
+                sql: "insert into articles(titre, descr, date_pub, date_modif) values(?,?,datetime('now'),datetime('now'))",
+                args: [article.titre, article.descr] });
+    },
+
     findOneById: async function(id) {
         return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where id = ?", args: [id] });
     },

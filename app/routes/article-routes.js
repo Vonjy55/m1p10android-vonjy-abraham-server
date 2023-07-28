@@ -1,8 +1,12 @@
-const bodyParser = require('body-parser')
-
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 const recordRoutes = require('express').Router()
 
 const articleDb = require('../db/articles-db')
+const sharp = require('sharp')
+
+const randomUUID = require('crypto').randomUUID;
 
 // let { AllUsers, Client} = require('../utils/role')
 
@@ -11,19 +15,48 @@ const articleDb = require('../db/articles-db')
 
 const baseRoute = '/api/article'
 
-//inscription
-recordRoutes.route(`${baseRoute}`).post(async function(req, res) {
-    //TODO:Vérifier les champs
+const articleCoverName = `article-cover.webp`;
 
-    const article = {}
-    articleDb.saveOne(article)
-        .then((result) => res.json(result))
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
+    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article",req.params.id, articleCoverName));
+});
+
+recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
+
+    const article = {
+        titre: req.body.titre,
+        descr: req.body.descr,
+    }
+    articleDb.saveNew(article)
+        .then((result) => {
+            const targetPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", `${result.lastInsertRowid}`);
+
+            fs.mkdir(targetPath, { recursive: true }, (error, _) => {
+                sharp(req.file.buffer)
+                    .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))
+                    .webp() // ovay jpg() raha tsy mandeha am android
+                    .toFile(path.join(targetPath,articleCoverName))
+                    .then(_ => {
+
+                        req.file.buffer = null;
+                        res.json(result);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        throw error;
+                    });
+            });
+        })
         .catch((err) => {
             console.log('Erreur ' + err);
-            console.log(err.errInfo);
-            return res.status(400).send("Erreur lors de l'insertion de l'article!")
+            console.log(err);
+            return res.status(500).send("Erreur lors de l'insertion de l'article!")
         });
-});
+
+}, async (req, res) => res.json(req.result));
 
 recordRoutes.get(`${baseRoute}/:id`, /* checkJwt, checkRole(Client), */(req, res) => {
 

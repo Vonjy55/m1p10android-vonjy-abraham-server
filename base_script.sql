@@ -17,21 +17,21 @@ create table articles(
     date_modif text
 );
 
--- Jeu de donnees articles
+-- Jeu de donnees articles(Tsy valide tsony)
 
-INSERT INTO articles (
-    titre, descr, date_pub, date_modif
-) VALUES 
-( 'Vato Beach', 'Espace', date('now'), date('now') ),
-( 'Park botanique de Timbazaza', 'Park', date('now'), date('now') ),
-( 'Rova de Manjakamiadana', 'Patrimoine historique', date('now'), date('now') ),
-( 'Tsingy de Bemaraha', 'Park', date('now'), date('now') ),
-( 'KFC Gasy', 'Fast Food', date('now'), date('now') ),
-( 'Celtel Hotel', 'Hotel et relaxation', date('now'), date('now') ),
-( 'Rakiki au Palais des sports', 'Evenement culturel', date('now'), date('now') );
-
-
-INSERT INTO articles (
-    titre, descr, date_pub, date_modif
-) VALUES
-( 'test', 'Evenement culturel', date('now'), date('now') );
+-- INSERT INTO articles (
+--     titre, descr, date_pub, date_modif
+-- ) VALUES 
+-- ( 'Vato Beach', 'Espace', date('now'), date('now') ),
+-- ( 'Park de Timbazaza', 'Park', date('now'), date('now') ),
+-- ( 'Rova de Manjakamiadana', 'Patrimoine historique', date('now'), date('now') ),
+-- ( 'Tsingy de Bemaraha', 'Park', date('now'), date('now') ),
+-- ( 'KFC Gasy', 'Fast Food', date('now'), date('now') ),
+-- ( 'Celtel Hotel', 'Hotel et relaxation', date('now'), date('now') ),
+-- ( 'Rakiki au Palais des sports', 'Evenement culturel', date('now'), date('now') );
+--
+--
+-- INSERT INTO articles (
+--     titre, descr, date_pub, date_modif
+-- ) VALUES
+-- ( 'test', 'Evenement culturel', date('now'), date('now') );
