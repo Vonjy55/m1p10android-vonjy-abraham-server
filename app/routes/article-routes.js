@@ -25,9 +25,26 @@ recordRoutes.route(`${baseRoute}`).post(async function(req, res) {
         });
 });
 
-recordRoutes.get(`${baseRoute}`, /* checkJwt, checkRole(Client), */(req, res) => {
+recordRoutes.get(`${baseRoute}/:id`, /* checkJwt, checkRole(Client), */(req, res) => {
 
-    console.log(req);
+    articleDb.findOneById(req.params.id)
+        .then(articles => {
+            if (articles.rows.length === 0) {
+                throw new Error(`Pas d'articles avec l'id ${req.params.id}`);
+            }
+            res.status(200).json(
+                articles.rows[0]
+            );
+        }).catch((err) => {
+            console.error(err);
+            return res.status(500).json({
+                message: 'failed',
+            });
+        });
+
+});
+
+recordRoutes.get(`${baseRoute}`, /* checkJwt, checkRole(Client), */(req, res) => {
 
     let query;
 
@@ -39,9 +56,10 @@ recordRoutes.get(`${baseRoute}`, /* checkJwt, checkRole(Client), */(req, res) =>
 
     query.then((articles) => {
         res.status(200).json(
-            articles
+            articles.rows
         );
     }).catch((err) => {
+        console.error(err);
         return res.status(500).json({
             message: 'failed',
         });
