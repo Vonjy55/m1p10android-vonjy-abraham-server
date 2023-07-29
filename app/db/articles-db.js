@@ -20,7 +20,7 @@ module.exports = {
         return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where id = ?", args: [id] });
     },
     findOne: async function(titre) {
-        return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where titre like :titre || '%'", args: { titre: titre } });
+        return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where titre like '%' ||  :titre || '%'", args: { titre: titre } });
     },
     getAll: async function() {
         return client_local.execute("select id, titre, descr, date_pub, date_modif from articles");
