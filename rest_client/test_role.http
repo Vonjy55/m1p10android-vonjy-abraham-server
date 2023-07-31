@@ -1,7 +1,7 @@
 # @baseUrl = https://m1p10mean.onrender.com/
 
-@baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDMwNDUyNCwiZXhwIjoxNjkwMzA4MTI0fQ.dfT3fCOEOE_RI4NU11XrguST47OpT86FAInGVk2XUOw
+@baseUrl = https://0794-154-126-56-74.ngrok-free.app/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyciIsInVzZXJJZCI6MiwiaWF0IjoxNjkwNzk1NTU2LCJleHAiOjE2OTA3OTkxNTZ9.LX6ddCySE4ha1_RfFWxmHiSzVBiV3p-mGpNKyRXjCZw
 
 
 ###
@@ -9,20 +9,22 @@ POST {{baseUrl}}/auth/inscription HTTP/1.1
 Content-Type: application/json
 
 {
-    "nom":"Vonjy",
-    "prenom":"Tahina",
+    "nom":"Abrr",
+    "prenom":"Ram",
     "password":"123456",
-    "email":"vonjy@gmail.com",
-    "telephone":"0341151776",
-    "adresse":"Anosy",
+    "email":"abraham@gmail.com",
+    "telephone":"0342456542",
+    "adresse":"Antanimena",
     "role":"Client"
 }
+
 ###
+
 POST {{baseUrl}}/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"vonjy@gmail.com",
+    "email":"abraham@gmail.com",
     "password":"123456"
 }
 

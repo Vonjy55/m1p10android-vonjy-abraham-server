@@ -7,10 +7,12 @@ const recordRoutes = require('express').Router()
 const userDb = require('../db/users-db')
 const { User } = require('../models/user')
 
-let { AllUsers, Client} = require('../utils/role')
+let { AllUsers, Client } = require('../utils/role')
 
 const checkJwt = require('../middlewares/checkJwt')
 const checkRole = require('../middlewares/checkRole')
+const user = require('../models/user')
+const usersDb = require('../db/users-db')
 
 const baseRoute = '/api/auth'
 
@@ -33,7 +35,7 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function(req, res) {
             .then((result) => res.json(result))
             .catch((err) => {
                 console.log('Erreur ' + err);
-                console.log( err.errInfo);
+                console.log(err.errInfo);
                 return res.status(400).send("Erreur lors de l'insertion de l'utilisateur!")
             })
     })
@@ -41,35 +43,34 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function(req, res) {
 
 //login
 recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
-    let getUser
-    userDb
-        .findOne(
-            req.body.email
-        )
-        .catch((err) => {  
-            console.log(err)          
-            throw new Error(`Erreur lors de la recherche de l'email '${req.body.email}'`)
-        })
+    let getUser;
+    console.log(req.body.email);
+    // console.log(data);
+    userDb.findOne(
+        req.body.email
+    )
         .then((user) => {
-            if (!user) {
+            console.log(user);
+            if (!user.rows.length) {
                 throw new Error(`Pas de mail correspondant à '${req.body.email}'`)
             }
             getUser = user.rows[0]
-
-            return bcrypt.compare(req.body.password, user.rows[0].password)
+            return bcrypt.compare(req.body.password, getUser.password)
         })
         .then((response) => {
             if (!response) {
                 throw new Error(`Erreur lors de la comparaison des MdP`)
             }
+
             let jwtToken = jwt.sign({
-                    name: getUser.nom,
-                    userId: getUser.id,
-                },
+                name: getUser.nom,
+                userId: getUser.id,
+            },
                 process.env.JWT_TOKEN_SECRET, {
-                    expiresIn: '1h',
-                },
+                expiresIn: '1h',
+            },
             )
+            console.log("login ok");
             return res.status(200).json({
                 token: jwtToken,
                 expiresIn: 3600,
@@ -86,7 +87,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
 })
 
 
-recordRoutes.get('/api/auth/allUser', checkJwt, checkRole(Client), (req, res) => {
+recordRoutes.get('/api/auth/allUser',checkJwt, checkRole(Client), (req, res) => {
 
     userDb.getAll()
         .then((user) => {
