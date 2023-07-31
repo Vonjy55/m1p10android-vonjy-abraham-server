@@ -87,7 +87,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
 })
 
 
-recordRoutes.get('/api/auth/allUser', (req, res) => {
+recordRoutes.get('/api/auth/allUser',checkJwt, checkRole(Client), (req, res) => {
 
     userDb.getAll()
         .then((user) => {
