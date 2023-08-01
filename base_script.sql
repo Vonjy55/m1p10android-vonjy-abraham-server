@@ -13,6 +13,7 @@ create table articles(
     id integer NOT NULL PRIMARY KEY autoincrement,
     titre varchar(255) NOT NULL,
     descr varchar(255),
+    contenu text, -- contenu de l'article (HTML)
     date_pub text,
     date_modif text
 );

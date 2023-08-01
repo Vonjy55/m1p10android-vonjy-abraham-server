@@ -6,8 +6,6 @@ const recordRoutes = require('express').Router()
 const articleDb = require('../db/articles-db')
 const sharp = require('sharp')
 
-const randomUUID = require('crypto').randomUUID;
-
 // let { AllUsers, Client} = require('../utils/role')
 
 // const checkJwt = require('../middlewares/checkJwt')
@@ -43,6 +41,7 @@ recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
 
                         req.file.buffer = null;
                         res.json(result);
+
                     })
                     .catch(error => {
                         console.error(error);
