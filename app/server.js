@@ -23,12 +23,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Logs
-app.use('/*', function(req,res,next){
+app.use('/*', function(req, res, next) {
     console.log(`${req.method} ${req.originalUrl}`);
     next();
 });
 
 app.use('/', express.static(path.join(__dirname, 'public')))
+
+//Check sante du server pour deploiement
+app.get('/check', function(_, res) { res.sendStatus(200); });
 
 app.get('/*', function(req, res, next) {
     if (req.originalUrl.startsWith('/api')) {
