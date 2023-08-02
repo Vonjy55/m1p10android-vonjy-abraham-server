@@ -25,7 +25,6 @@ recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
 });
 
 recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
-
     const article = {
         titre: req.body.titre,
         descr: req.body.descr,
@@ -34,7 +33,7 @@ recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
     articleDb.saveNew(article)
         .then((result) => {
             const targetPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", `${result.lastInsertRowid}`);
-
+            
             fs.mkdir(targetPath, { recursive: true }, (error, _) => {
                 sharp(req.file.buffer)
                     .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))

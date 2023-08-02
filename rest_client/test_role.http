@@ -1,6 +1,6 @@
 # @baseUrl = https://m1p10mean.onrender.com/
 
-@baseUrl = http://localhost:3000/api
+@baseUrl = https://b8f4-154-126-56-74.ngrok-free.app/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyciIsInVzZXJJZCI6MiwiaWF0IjoxNjkwNzk1NTU2LCJleHAiOjE2OTA3OTkxNTZ9.LX6ddCySE4ha1_RfFWxmHiSzVBiV3p-mGpNKyRXjCZw
 
 
