@@ -29,6 +29,7 @@ recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
     const article = {
         titre: req.body.titre,
         descr: req.body.descr,
+        contenu: req.body.contenu,
     }
     articleDb.saveNew(article)
         .then((result) => {

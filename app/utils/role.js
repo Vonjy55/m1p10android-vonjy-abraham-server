@@ -8,7 +8,12 @@ let Client = [
     'Client',
 ]
 
+let Atelier = [
+    'Atelier',
+]
+
 module.exports = {
     AllUsers,
-    Client
+    Client,
+    Atelier
 }

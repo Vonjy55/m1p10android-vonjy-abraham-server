@@ -12,18 +12,18 @@ module.exports = {
     saveNew: async function(article) {
         return client_local.execute(
             {
-                sql: "insert into articles(titre, descr, date_pub, date_modif) values(?,?,datetime('now'),datetime('now'))",
-                args: [article.titre, article.descr] });
+                sql: "insert into articles(titre, descr, contenu, date_pub, date_modif) values(?,?,?,datetime('now'),datetime('now'))",
+                args: [article.titre, article.descr, article.contenu] });
     },
 
     findOneById: async function(id) {
-        return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where id = ?", args: [id] });
+        return client_local.execute({ sql: "select id, titre, descr, contenu, date_pub, date_modif from articles where id = ?", args: [id] });
     },
     findOne: async function(titre) {
-        return client_local.execute({ sql: "select id, titre, descr, date_pub, date_modif from articles where titre like '%' ||  :titre || '%'", args: { titre: titre } });
+        return client_local.execute({ sql: "select id, titre, descr, contenu, date_pub, date_modif from articles where titre like '%' ||  :titre || '%'", args: { titre: titre } });
     },
     getAll: async function() {
-        return client_local.execute("select id, titre, descr, date_pub, date_modif from articles");
+        return client_local.execute("select id, titre, descr, contenu, date_pub, date_modif from articles");
     },
 
 }
