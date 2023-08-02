@@ -6,7 +6,8 @@
 
 
 ###
-POST {{baseUrl}}/auth/inscription HTTP/1.1
+
+POST http://localhost:3000/api/auth/inscription HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,7 +17,7 @@ Content-Type: application/json
     "email":"vonjy@gmail.com",
     "telephone":"0341151776",
     "adresse":"Anosy",
-    "role":"Client"
+    "role":"Admin"
 }
 ###
 
