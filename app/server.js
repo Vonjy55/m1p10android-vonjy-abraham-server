@@ -13,11 +13,11 @@ const { client_local } = require('./config/connection').client_local
 
 const port = process.env.PORT || 3000;
 
-var corsOptions = {
-    origin: "http://localhost:4200"
-};
-
-app.use(cors(corsOptions));
+// var corsOptions = {
+//     origin: "http://localhost:4200"
+// };
+//
+// app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
