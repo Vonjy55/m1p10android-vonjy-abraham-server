@@ -1,7 +1,7 @@
 # @baseUrl = https://m1p10mean.onrender.com/
-@baseUrl = https://tourisme-mada-m1p10android.onrender.com/api
+# @baseUrl = https://tourisme-mada-m1p10android.onrender.com/api
 
-# @baseUrl = https://0794-154-126-56-74.ngrok-free.app/api
+@baseUrl = https://60ba-154-126-56-74.ngrok-free.app/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyciIsInVzZXJJZCI6MiwiaWF0IjoxNjkwNzk1NTU2LCJleHAiOjE2OTA3OTkxNTZ9.LX6ddCySE4ha1_RfFWxmHiSzVBiV3p-mGpNKyRXjCZw
 
 
@@ -40,7 +40,7 @@ POST {{baseUrl}}/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"abraham@gmail.com",
+    "email":"vonjy@gmail.com",
     "password":"123456"
 }
 

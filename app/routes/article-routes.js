@@ -8,6 +8,9 @@ const sharp = require('sharp')
 
 const randomUUID = require('crypto').randomUUID;
 
+
+const adminFirebase = require('../utils/firebase')
+
 // let { AllUsers, Client} = require('../utils/role')
 
 // const checkJwt = require('../middlewares/checkJwt')
@@ -25,6 +28,16 @@ recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
 });
 
 recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
+
+    // tokenString = req.headers["authorization"];
+    // tokenString = tokenString.replace("Bearer ", "");
+    // const message = {
+    //     notification:{
+    //         title:'Madagascar tourisme',
+    //         body: req.body.titre,
+    //     },
+    //     token:tokenString //tsy aiko inona le token eto
+    // };
 
     const article = {
         titre: req.body.titre,
@@ -49,6 +62,9 @@ recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
                         throw error;
                     });
             });
+
+            // const response = adminFirebase.messaging().send(message);
+            // console.log('Notification envoyée avec succès :', response);
         })
         .catch((err) => {
             console.log('Erreur ' + err);
