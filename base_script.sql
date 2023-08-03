@@ -8,29 +8,54 @@ create table users(
     password varchar(100),
     role varchar(20)
 );
-
 create table articles(
     id integer NOT NULL PRIMARY KEY autoincrement,
     titre varchar(255) NOT NULL,
     descr varchar(255),
     contenu text, -- contenu de l'article (HTML)
+    ville integer,
     date_pub text,
-    date_modif text
+    date_modif text,
+    video text, -- youtube video id
+    FOREIGN KEY (ville) REFERENCES villes(id)
 );
 
--- Jeu de donnees articles(Tsy valide tsony)
+create table villes(
+    id integer NOT NULL PRIMARY KEY autoincrement,
+    nom text NOT NULL,
+    longitude real NOT NULL,
+    latitude real NOT NULL
+);
 
--- INSERT INTO articles (
---     titre, descr, date_pub, date_modif
--- ) VALUES 
--- ( 'Vato Beach', 'Espace', date('now'), date('now') ),
--- ( 'Park de Timbazaza', 'Park', date('now'), date('now') ),
--- ( 'Rova de Manjakamiadana', 'Patrimoine historique', date('now'), date('now') ),
--- ( 'Tsingy de Bemaraha', 'Park', date('now'), date('now') ),
--- ( 'KFC Gasy', 'Fast Food', date('now'), date('now') ),
--- ( 'Celtel Hotel', 'Hotel et relaxation', date('now'), date('now') ),
--- ( 'Rakiki au Palais des sports', 'Evenement culturel', date('now'), date('now') );
---
+alter table articles add column ville integer;
+alter table articles add column video integer;
+ALTER TABLE articles add FOREIGN KEY(ville) REFERENCES villes(id);
+
+-- Jeu de donnees villes
+INSERT INTO villes (
+    nom, latitude, longitude
+) VALUES
+( 'global', 0, 0 ),
+( 'Antananarivo', -18.891504, 47.517300 ),
+( 'Mahajanga', -15.695517, 46.343246 ),
+( 'Toamasina', -18.148496, 49.394193 ),
+( 'Toliara', -23.356097, 43.690068 ),
+( 'Antsiranana', -12.311559, 49.292644 ),
+( 'Fianarantsoa', -21.452559, 47.087316 );
+
+-- Jeu de donnees articles
+
+ INSERT INTO articles (
+     titre, descr, date_pub, date_modif, ville
+ ) VALUES 
+ ( 'Vato Beach', 'Espace', date('now'), date('now'), 2),
+ ( 'Park de Timbazaza', 'Park', date('now'), date('now'), 6),
+ ( 'Rova de Manjakamiadana', 'Patrimoine historique', date('now'), date('now'), 2),
+ ( 'Tsingy de Bemaraha', 'Park', date('now'), date('now'), 3),
+ ( 'KFC Gasy', 'Fast Food', date('now'), date('now'), 1),
+ ( 'Celtel Hotel', 'Hotel et relaxation', date('now'), date('now'), 2),
+ ( 'Rakiki au Palais des sports', 'Evenement culturel', date('now'), date('now'), 1);
+
 --
 -- INSERT INTO articles (
 --     titre, descr, date_pub, date_modif

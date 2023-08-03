@@ -22,6 +22,12 @@ recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
     res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article",req.params.id, articleCoverName));
 });
 
+recordRoutes.get(`${baseRoute}/villes`, async function(req, res) {
+    articleDb.getVilles()
+        .then( villes => res.status(200).json(villes.rows) )
+        .catch(error => console.error(error));
+});
+
 recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
 
     const article = {
