@@ -1,8 +1,8 @@
 # @baseUrl = https://m1p10mean.onrender.com/
 # @baseUrl = https://tourisme-mada-m1p10android.onrender.com/api
 
-@baseUrl = https://60ba-154-126-56-74.ngrok-free.app/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyciIsInVzZXJJZCI6MiwiaWF0IjoxNjkwNzk1NTU2LCJleHAiOjE2OTA3OTkxNTZ9.LX6ddCySE4ha1_RfFWxmHiSzVBiV3p-mGpNKyRXjCZw
+@baseUrl = https://cc5e-41-77-20-8.ngrok-free.app/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjIsImlhdCI6MTY5MTIzMjA5MywiZXhwIjoxNjkxMjM1NjkzfQ.FpF7CZO8DLC4Lwxm2qVr-9v_05pjVjgEuq8x0gWX2WM
 
 
 

@@ -91,7 +91,7 @@ recordRoutes.get('/api/auth/allUser',checkJwt, checkRole(Client), (req, res) => 
 
     userDb.getAll()
         .then((user) => {
-            console.log(user);
+            console.log("-----",user);
             if (!user) {
                 return res.status(401).json({
                     message: 'Authentification échouée',
