@@ -27,7 +27,8 @@ recordRoutes.get(`${baseRoute}/:id/slides`, async function(req, res) {
     try {
         const dirPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides");
         fs.readdir(dirPath, (err,files) => {
-            res.status(200).json({ files: files.length });
+
+            res.status(200).json({ files: files });
         });
 
     } catch (err) {
@@ -35,8 +36,8 @@ recordRoutes.get(`${baseRoute}/:id/slides`, async function(req, res) {
     }
 });
 
-recordRoutes.get(`${baseRoute}/:id/slides/:count`, async function(req, res) {
-    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides", `${req.params.count}.webp`));
+recordRoutes.get(`${baseRoute}/:id/slides/:file`, async function(req, res) {
+    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides", `${req.params.file}`));
 });
 
 
