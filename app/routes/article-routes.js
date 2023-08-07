@@ -35,6 +35,43 @@ recordRoutes.get(`${baseRoute}/full`, async function(_, res) {
         .catch(error => console.error(error));
 });
 
+
+recordRoutes.post(`${baseRoute}/slides`, upload.array('slides'), async function(req, res) {
+    const id = req.body.id;
+
+    const targetPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", id, 'slides');
+
+    try{
+    fs.mkdir(targetPath, { recursive: true }, (error, _) => {
+        // console.log(req.files);
+        for (let i = 0; i< req.files.length; i++) {
+            sharp(req.files[i].buffer)
+                .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))
+                .webp() // ovay jpg() raha tsy mandeha am android
+                .toFile(path.join(targetPath, `${i}.webp`))
+                .then(_ => {
+
+                    req.files[i].buffer = null;
+
+                })
+                .catch(error => {
+                    console.error(error);
+                    throw error;
+                });
+          
+        }
+
+        res.status(200).json({message:"OK"});
+    });
+}
+    catch(err) {
+        console.log('Erreur ' + err);
+        console.log(err);
+        return res.status(500).send("Erreur lors de l'insertion de l'article!")
+    }
+
+});
+
 recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
     const article = {
         titre: req.body.titre,
