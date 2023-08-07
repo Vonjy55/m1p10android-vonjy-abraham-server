@@ -28,7 +28,7 @@ recordRoutes.get(`${baseRoute}/:id/slides`, async function(req, res) {
         const dirPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides");
         fs.readdir(dirPath, (err,files) => {
 
-            res.status(200).json({ files: files });
+            res.status(200).json(files);
         });
 
     } catch (err) {
