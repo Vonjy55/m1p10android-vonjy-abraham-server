@@ -28,7 +28,8 @@ create table villes(
 );
 
 alter table articles add column ville integer;
-alter table articles add column video integer;
+alter table articles add column video text;
+alter table articles add column contenu text;
 ALTER TABLE articles add column longitude decimal;
 ALTER TABLE articles add column latitude decimal;
 

@@ -8,28 +8,17 @@
 
 ###
 
-<<<<<<< HEAD
-POST http://localhost:3000/api/auth/inscription HTTP/1.1
-=======
 POST {{basebaseUrl}}/auth/inscription HTTP/1.1
->>>>>>> localisation
 Content-Type: application/json
 
 {
     "nom":"ram",
     "prenom":"abrr",
     "password":"123456",
-<<<<<<< HEAD
-    "email":"vonjy@gmail.com",
-    "telephone":"0341151776",
-    "adresse":"Anosy",
-    "role":"Admin"
-=======
     "email":"abraham@gmail.com",
     "telephone":"0343233380",
     "adresse":"Andoharanofotsy",
     "role":"Atelier"
->>>>>>> localisation
 }
 
 ###
@@ -58,4 +47,4 @@ GET {{baseUrl}}/4 HTTP/1.1
 
 ###
 
-GET {{baseUrl}}/villes HTTP/1.1
+GET {{baseUrl}}/full HTTP/1.1
