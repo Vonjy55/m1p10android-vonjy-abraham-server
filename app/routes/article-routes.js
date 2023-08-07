@@ -22,6 +22,24 @@ recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
     res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, articleCoverName));
 });
 
+
+recordRoutes.get(`${baseRoute}/:id/slides`, async function(req, res) {
+    try {
+        const dirPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides");
+        fs.readdir(dirPath, (err,files) => {
+            res.status(200).json({ files: files.length });
+        });
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+recordRoutes.get(`${baseRoute}/:id/slides/:count`, async function(req, res) {
+    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, "slides", `${req.params.count}.webp`));
+});
+
+
 recordRoutes.get(`${baseRoute}/villes`, async function(_, res) {
     articleDb.getVilles()
         .then(villes => res.status(200).json(villes.rows))
@@ -41,30 +59,30 @@ recordRoutes.post(`${baseRoute}/slides`, upload.array('slides'), async function(
 
     const targetPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", id, 'slides');
 
-    try{
-    fs.mkdir(targetPath, { recursive: true }, (error, _) => {
-        // console.log(req.files);
-        for (let i = 0; i< req.files.length; i++) {
-            sharp(req.files[i].buffer)
-                .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))
-                .webp() // ovay jpg() raha tsy mandeha am android
-                .toFile(path.join(targetPath, `${i}.webp`))
-                .then(_ => {
+    try {
+        fs.mkdir(targetPath, { recursive: true }, (error, _) => {
+            // console.log(req.files);
+            for (let i = 0; i < req.files.length; i++) {
+                sharp(req.files[i].buffer)
+                    .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))
+                    .webp() // ovay jpg() raha tsy mandeha am android
+                    .toFile(path.join(targetPath, `${i}.webp`))
+                    .then(_ => {
 
-                    req.files[i].buffer = null;
+                        req.files[i].buffer = null;
 
-                })
-                .catch(error => {
-                    console.error(error);
-                    throw error;
-                });
-          
-        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        throw error;
+                    });
 
-        res.status(200).json({message:"OK"});
-    });
-}
-    catch(err) {
+            }
+
+            res.status(200).json({ message: "OK" });
+        });
+    }
+    catch (err) {
         console.log('Erreur ' + err);
         console.log(err);
         return res.status(500).send("Erreur lors de l'insertion de l'article!")
