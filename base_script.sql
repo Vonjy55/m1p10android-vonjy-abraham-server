@@ -8,17 +8,17 @@ create table users(
     password varchar(100),
     role varchar(20)
 );
-create table articles(
+
+CREATE TABLE IF NOT EXISTS "articles_new"(
     id integer NOT NULL PRIMARY KEY autoincrement,
     titre varchar(255) NOT NULL,
     descr varchar(255),
     contenu text, -- contenu de l'article (HTML)
     ville integer,
     date_pub text,
-    date_modif text,
-    video text, -- youtube video id
-    FOREIGN KEY (ville) REFERENCES villes(id)
+    date_modif text, video text, longitude decimal, latitude decimal
 );
+
 
 create table villes(
     id integer NOT NULL PRIMARY KEY autoincrement,
@@ -29,7 +29,8 @@ create table villes(
 
 alter table articles add column ville integer;
 alter table articles add column video integer;
-ALTER TABLE articles add FOREIGN KEY(ville) REFERENCES villes(id);
+ALTER TABLE articles add column longitude decimal;
+ALTER TABLE articles add column latitude decimal;
 
 -- Jeu de donnees villes
 INSERT INTO villes (
