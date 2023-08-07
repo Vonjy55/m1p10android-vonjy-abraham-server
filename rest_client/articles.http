@@ -2,30 +2,43 @@
 # @baseUrl = https://m1p10mean.onrender.com/
 
 @baseUrl = http://localhost:3000/api/article
+@basebaseUrl = http://localhost:3000/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOjEsImlhdCI6MTY5MDMwNDUyNCwiZXhwIjoxNjkwMzA4MTI0fQ.dfT3fCOEOE_RI4NU11XrguST47OpT86FAInGVk2XUOw
 
 
 ###
 
+<<<<<<< HEAD
 POST http://localhost:3000/api/auth/inscription HTTP/1.1
+=======
+POST {{basebaseUrl}}/auth/inscription HTTP/1.1
+>>>>>>> localisation
 Content-Type: application/json
 
 {
-    "nom":"Vonjy",
-    "prenom":"Tahina",
+    "nom":"ram",
+    "prenom":"abrr",
     "password":"123456",
+<<<<<<< HEAD
     "email":"vonjy@gmail.com",
     "telephone":"0341151776",
     "adresse":"Anosy",
     "role":"Admin"
+=======
+    "email":"abraham@gmail.com",
+    "telephone":"0343233380",
+    "adresse":"Andoharanofotsy",
+    "role":"Atelier"
+>>>>>>> localisation
 }
+
 ###
 
 POST {{baseUrl}}/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"vonjy@gmail.com",
+    "email":"abraham@gmail.com",
     "password":"123456"
 }
 
@@ -42,3 +55,7 @@ GET {{baseUrl}}?s=Vato HTTP/1.1
 ###
 
 GET {{baseUrl}}/4 HTTP/1.1
+
+###
+
+GET {{baseUrl}}/villes HTTP/1.1

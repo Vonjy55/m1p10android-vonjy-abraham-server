@@ -6,8 +6,6 @@ const recordRoutes = require('express').Router()
 const articleDb = require('../db/articles-db')
 const sharp = require('sharp')
 
-const randomUUID = require('crypto').randomUUID;
-
 // let { AllUsers, Client} = require('../utils/role')
 
 // const checkJwt = require('../middlewares/checkJwt')
@@ -21,28 +19,52 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 recordRoutes.get(`${baseRoute}/:id/cover`, async function(req, res) {
-    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article",req.params.id, articleCoverName));
+    res.sendFile(path.join(process.cwd(), process.env.MEDIA_DIR, "article", req.params.id, articleCoverName));
+});
+
+recordRoutes.get(`${baseRoute}/villes`, async function(_, res) {
+    articleDb.getVilles()
+        .then(villes => res.status(200).json(villes.rows))
+        .catch(error => console.error(error));
+});
+
+
+recordRoutes.get(`${baseRoute}/full`, async function(_, res) {
+    articleDb.getAllFull()
+        .then(articles => res.status(200).json(articles.rows))
+        .catch(error => console.error(error));
 });
 
 recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
-
     const article = {
         titre: req.body.titre,
         descr: req.body.descr,
+        contenu: req.body.contenu,
+        video: req.body.video,
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
     }
-    articleDb.saveNew(article)
+
+    articleDb.save(article)
         .then((result) => {
+
+            if (!req.file) {
+                res.status(200).json(result);
+                return;
+            }
+
             const targetPath = path.join(process.cwd(), process.env.MEDIA_DIR, "article", `${result.lastInsertRowid}`);
 
             fs.mkdir(targetPath, { recursive: true }, (error, _) => {
                 sharp(req.file.buffer)
                     .resize(parseInt(process.env.ARTICLE_COVER_WIDTH))
                     .webp() // ovay jpg() raha tsy mandeha am android
-                    .toFile(path.join(targetPath,articleCoverName))
+                    .toFile(path.join(targetPath, articleCoverName))
                     .then(_ => {
 
                         req.file.buffer = null;
-                        res.json(result);
+                        res.status(200).json(result);
+
                     })
                     .catch(error => {
                         console.error(error);
@@ -56,7 +78,7 @@ recordRoutes.post(baseRoute, upload.single('cover'), async function(req, res) {
             return res.status(500).send("Erreur lors de l'insertion de l'article!")
         });
 
-}, async (req, res) => res.json(req.result));
+});
 
 recordRoutes.get(`${baseRoute}/:id`, /* checkJwt, checkRole(Client), */(req, res) => {
 
